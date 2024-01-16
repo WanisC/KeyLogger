@@ -1,0 +1,30 @@
+# Ignorer les fichiers et dossiers générés par l'environnement de développement
+.idea/
+.vscode/
+node_modules/
+
+# Ignorer les fichiers de build
+build/
+dist/
+
+# Ignorer les fichiers de configuration spécifiques à votre environnement
+.env
+
+# Ignorer les fichiers de sauvegarde
+*.bak
+*.swp
+*~
+
+# Ignorer les fichiers de log
+*.log
+logs/
+
+# Ignorer les fichiers de cache
+.cache/
+
+# Ignorer les fichiers de dépendances spécifiques à votre langage ou framework
+# Ajoutez ici les fichiers ou dossiers spécifiques à votre projet
+
+# BEGIN: Ajoutez vos règles d'ignorance personnalisées ici
+
+# END: Ajoutez vos règles d'ignorance personnalisées ici
