@@ -1,8 +1,8 @@
 // Keylogger for Linux machine
 
 #include <time.h>
-#include <curses.h>
-#include <libevdev/libevdev.h>
+// #include <curses.h>
+// #include <libevdev/libevdev.h>
 #include "linux_keylog.h"
 
 // Whenever the keylogger is started, add this to the file first
@@ -36,6 +36,4 @@ void linux_keylog(const char* filePath) {
 }
 
 // End the keylogger
-void end_keylog(const char *filePath) {
-
-}
+// void end_keylog(const char *filePath) {}
