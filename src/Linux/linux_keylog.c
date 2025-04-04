@@ -1,8 +1,7 @@
 // Keylogger for Linux machine
 
 #include <time.h>
-// #include <curses.h>
-// #include <libevdev/libevdev.h>
+#include <stdlib.h>
 #include "linux_keylog.h"
 #include "../writing/file.h"
 
@@ -18,7 +17,7 @@ void linWriteHeader(const char* filePath) {
     time_t t = time(NULL);
     struct tm st = *localtime(&t);
     char date[100];
-    sprintf(date, "[%04d/%02d/%02d %02d:%02d:%02d] : ", st.tm_mday, st.tm_mon+1, st.tm_year+1900, st.tm_hour, st.tm_min, st.tm_sec);
+    sprintf(date, "[%02d/%02d/%02d %02d:%02d:%02d] : ", st.tm_mday, st.tm_mon+1, st.tm_year+1900, st.tm_hour, st.tm_min, st.tm_sec);
     fputs(date, file);
     fflush(file);
     fclose(file);
@@ -29,7 +28,22 @@ void lin_keylog(const char* filePath) {
 
     // Write the header into the file
     linWriteHeader(filePath);
+
+    // Check if the keylogger should end
+    end_keylog(filePath);
 }
 
 // End the keylogger
-// void end_keylog(const char *filePath) {}
+void end_keylog(const char *filePath) {
+    // Add a new line to the file
+    FILE *file;
+    file = fopen(filePath, "a");
+    if (file == NULL) {
+        return;
+    }
+    fputs("\n", file);
+    fflush(file);
+    fclose(file);
+
+    system("clear"); // Clear the console
+}
