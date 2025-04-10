@@ -2,7 +2,6 @@
 
 #include <stdlib.h>
 #include <sys/stat.h>
-#include <sys/types.h>
 #include "file.h"
 
 #ifdef _WIN32
@@ -38,7 +37,7 @@ int specialKeys[SPECIAL_KEYS_LENGTH] = {
     0x05, 0x06, // X1-X2 Button
     0xBE, // Period
     0xBC, // Comma
-    0xBA, 0xE2, 0xBF, 0xC0, 0xDB, 0xDC, 0xDD, 0xDE, 0xDF,// OEM_1/OEM_102/OEM_2/OEM_3/OEM_4/OEM_5/OEM_6/OEM_7/OEM_8
+    0xBA, 0xE2, 0xBF, 0xC0, 0xDB, 0xDC, 0xDD, 0xDE, 0xDF,// OEM_1-OEM_102-OEM_2-OEM_3-OEM_4-OEM_5-OEM_6-OEM_7-OEM_8
     0xBB, // OEM_Plus
     0xBD, // OEM_Minus
     0x6F, 0x6A, 0x6D, 0x6B, // Divide-Multiply-Subtract-Add
@@ -81,7 +80,7 @@ int CheckSpecialKey(int data) {
 }
 
 // Convert special key into readable key for Windows
-char* windows_SpecialKeyToReadable(int data) {
+char* SpecialKeyToReadable(int data) {
     char *specialKey = NULL;
 
     switch(data) {
