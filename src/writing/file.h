@@ -6,7 +6,7 @@ extern int specialKeys[];
 
 // Special keys functions
 int CheckSpecialKey(int data);
-char* SpecialKeyToReadable(int data);
+char* windows_SpecialKeyToReadable(int data);
 
 
 // File writing functions
