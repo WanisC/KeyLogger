@@ -9,6 +9,8 @@
     #include <direct.h>
     #include <windows.h>
     #define mkdir(path, mode) _mkdir(path)  // Windows ignores mode
+#elif defined(__linux__)
+    #include <unistd.h>
 #endif
 
 #define SPECIAL_KEYS_LENGTH 66
@@ -17,10 +19,10 @@ int specialKeys[SPECIAL_KEYS_LENGTH] = {
     0x08, // Backspace
     0x0D, // Enter
     0x20, // Space
-    0xA4, 0xA5, // Left/Right Alt
+    0xA4, 0xA5, // Left-Right Alt
     0x09, // Tab
-    0xA0, 0xA1, // Left/Right Shift
-    0xA2, 0xA3, // Left/Right Control
+    0xA0, 0xA1, // Left-Right Shift
+    0xA2, 0xA3, // Left-Right Control
     0x1B, // Escape
     0x21, // Scroll Up
     0x22, // Scroll Down
@@ -32,14 +34,14 @@ int specialKeys[SPECIAL_KEYS_LENGTH] = {
     0x28, // Down Arrow
     0x2E, // Delete
     0x2D, // Insert
-    0x01, 0x02, 0x04, // Left/Right/Middle Click
-    0x05, 0x06, // X1/X2 Button
+    0x01, 0x02, 0x04, // Left-Right-Middle Click
+    0x05, 0x06, // X1-X2 Button
     0xBE, // Period
     0xBC, // Comma
     0xBA, 0xE2, 0xBF, 0xC0, 0xDB, 0xDC, 0xDD, 0xDE, 0xDF,// OEM_1/OEM_102/OEM_2/OEM_3/OEM_4/OEM_5/OEM_6/OEM_7/OEM_8
     0xBB, // OEM_Plus
     0xBD, // OEM_Minus
-    0x6F, 0x6A, 0x6D, 0x6B, // Divide/Multiply/Subtract/Add
+    0x6F, 0x6A, 0x6D, 0x6B, // Divide-Multiply-Subtract-Add
     0x30, // Touch "0"
     0x31, // Touch "1"
     0x32, // Touch "2"
